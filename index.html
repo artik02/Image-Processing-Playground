@@ -34,7 +34,7 @@
 
     const resImage = Img('').Id('responsiveImage');
     resImage.onload = () => { imageReady(); };
-    window.onresize = setOriginalImage;
+    window.onresize = setImageSize;
 
     const resCanvas = Canvas('').Id('responsiveCanvas');
 
@@ -104,11 +104,15 @@
       }, 100);
     }
 
+    function setImageSize() {
+      resCanvas.offsetWidth = resImage.offsetWidth;
+      resCanvas.offsetHeight = resImage.offsetHeight;
+    }
+
     function setOriginalImage() {
       if (imageR == false) return;
 
-      resCanvas.offsetWidth = resImage.offsetWidth;
-      resCanvas.offsetHeight = resImage.offsetHeight;
+      setImageSize();
 
       let mat = cv.imread(resImage);
       cv.imshow('responsiveCanvas', mat);
