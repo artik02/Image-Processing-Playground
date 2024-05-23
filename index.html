@@ -84,7 +84,7 @@
     const srcBinarizationSource = Input('checkbox').Id('sourceBinarizationSource').Class('toolbox-checkbox')
     .Att('onchange', 'srcBinarizationSourceOn();');
     function srcBinarizationSourceOn() {
-      lblBinarizationSource.replaceChildren(getText('lblBinarizationSource') + (srcBinarizationSource.checked ? 'Modified' : 'Original'))
+      lblBinarizationSource.replaceChildren(getText('lblBinarizationSource') + (srcBinarizationSource.checked ? getText('Modified') : getText('Original')));
     };
 
     function openCVReady() {

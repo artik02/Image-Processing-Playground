@@ -23,7 +23,7 @@ const language_map = {
     'lblGammaSource': 'Imagen fuente para Corrección Gamma: ',
     'lblBinarization': 'Umbral para la Binarización: ',
     'lblBinarizationSource': 'Imagen fuente para la Binarización: ',
-    'Modified': 'Modificado',
+    'Modified': 'Modificada',
     'Original': 'Original',
   },
 };
