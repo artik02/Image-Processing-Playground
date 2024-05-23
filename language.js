@@ -10,6 +10,8 @@ const language_map = {
     'lblGammaSource': 'Gamma Correction Source: ',
     'lblBinarization': 'Binarization Threshold: ',
     'lblBinarizationSource': 'Binarization Source: ',
+    'Modified': 'Modified',
+    'Original': 'Original',
   },
   'es': {
     'fileHeader': 'Elige una imagen',
@@ -21,6 +23,8 @@ const language_map = {
     'lblGammaSource': 'Imagen fuente para Corrección Gamma: ',
     'lblBinarization': 'Umbral para la Binarización: ',
     'lblBinarizationSource': 'Imagen fuente para la Binarización: ',
+    'Modified': 'Modificado',
+    'Original': 'Original',
   },
 };
 

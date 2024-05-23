@@ -67,7 +67,7 @@
     const srcGammaSource = Input('checkbox').Id('sourceGammaSource').Class('toolbox-checkbox')
     .Att('onchange', 'srcGammaSourceOn();');
     function srcGammaSourceOn() {
-      lblGammaSource.replaceChildren(getText('lblGammaSource') + ((srcGammaSource.checked) ? 'Modified' : 'Original'));
+      lblGammaSource.replaceChildren(getText('lblGammaSource') + ((srcGammaSource.checked) ? getText('Modified') : getText('Original')));
     };
 
     const lblBinarization = Label('sourceBinarization', getText('lblBinarization') + '127').Id('labelBinarization').Class('toolbox-label');
