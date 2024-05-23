@@ -55,9 +55,11 @@
 
     const lblGamma = Label('sourceGamma', getText('lblGamma') + '1').Id('labelGamma').Class('toolbox-label');
     const srcGamma = Input('range', '1').Att('min', '0.1').Att('max', '4').Att('step', '0.05').Id('sourceGamma').Class('toolbox-range')
-    .Att('onchange', 'srcGammaOn();');
+    .Att('onchange', 'srcGammaOn();').Att('oninput', 'srcGammaOnLbl();');
     function srcGammaOn() {
       gammaCorrectionImage(srcGamma.value); 
+    };
+    function srcGammaOnLbl() {
       lblGamma.replaceChildren(getText('lblGamma') + srcGamma.value);
     };
 
@@ -70,9 +72,11 @@
 
     const lblBinarization = Label('sourceBinarization', getText('lblBinarization') + '127').Id('labelBinarization').Class('toolbox-label');
     const srcBinarization = Input('range', '127').Att('min', '1').Att('max', '254').Att('step', '1').Id('sourceBinarization').Class('toolbox-range')
-    .Att('onchange', 'srcBinarizationOn();');
+    .Att('onchange', 'srcBinarizationOn();').Att('oninput', 'srcBinarizationOnLbl();');
     function srcBinarizationOn() {
       binarizationImage(srcBinarization.value);
+    };
+    function srcBinarizationOnLbl() {
       lblBinarization.innerText = getText('lblBinarization') + srcBinarization.value;
     };
 
