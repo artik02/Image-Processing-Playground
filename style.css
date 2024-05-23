@@ -10,6 +10,7 @@ main {
 
 h1 {
   font-size: 60px;
+  text-align: center;
 }
 
 /* Style for file-section */
