@@ -63,14 +63,14 @@
       lblGamma.replaceChildren(getText('lblGamma') + srcGamma.value);
     };
 
-    const lblGammaSource = Label('sourceGammaSource', getText('lblGammaSource') + 'Original').Class('toolbox-label');
+    const lblGammaSource = Label('', getText('lblGammaSource') + 'Original').Class('toolbox-label');
     const srcGammaSource = Input('checkbox').Id('sourceGammaSource').Class('toolbox-checkbox')
     .Att('onchange', 'srcGammaSourceOn();');
     function srcGammaSourceOn() {
       lblGammaSource.replaceChildren(getText('lblGammaSource') + ((srcGammaSource.checked) ? getText('Modified') : getText('Original')));
     };
 
-    const lblBinarization = Label('sourceBinarization', getText('lblBinarization') + '127').Id('labelBinarization').Class('toolbox-label');
+    const lblBinarization = Label('', getText('lblBinarization') + '127').Id('labelBinarization').Class('toolbox-label');
     const srcBinarization = Input('range', '127').Att('min', '1').Att('max', '254').Att('step', '1').Id('sourceBinarization').Class('toolbox-range')
     .Att('onchange', 'srcBinarizationOn();').Att('oninput', 'srcBinarizationOnLbl();');
     function srcBinarizationOn() {
@@ -119,13 +119,25 @@
       mat.delete();
     }
 
+    const ArticleGamma = Article(
+      lblGamma, srcGamma, Div(lblGammaSource, srcGammaSource).Class('toolbox-div').Press(() => {
+        srcGammaSource.click();
+      }),
+    ).Class('toolbox-row');
+
+    const ArticleBinarization = Article(
+      lblBinarization, srcBinarization, Div(lblBinarizationSource, srcBinarizationSource).Class('toolbox-div').Press(() => {
+        srcBinarizationSource.click();
+      }),
+    ).Class('toolbox-row');
+
     const App = Yotta(Main(
       Section(H1(getText('fileHeader')).Id('file-header'), srcFile, H1(getText('openCVHeader')).Id('openCVHeader')).Id('file-section'),
       Section(resImage, resCanvas).Id('image-section').Att('style', 'display: none'),
       Section(
         Article(btnRestore, btnGrayscale, btnMinimum).Class('toolbox-button-row'),
-        Article(lblGamma, srcGamma, Div(lblGammaSource, srcGammaSource).Class('toolbox-div')).Class('toolbox-row'),
-        Article(lblBinarization, srcBinarization, Div(lblBinarizationSource, srcBinarizationSource).Class('toolbox-div')).Class('toolbox-row'),
+        ArticleGamma,
+        ArticleBinarization,
       ).Id('toolbox-section').Att('style', 'display: none'),
     ).Press(() => { if (imageR == false) { srcFile.click(); } })
     );

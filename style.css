@@ -138,3 +138,8 @@ h1 {
   width: 90%; /* 90% of the viewport width */
   max-width: 600px; /* Maximum width for precision */
 }
+
+.toolbox-checkbox {
+  min-width: 30px;
+  min-height: 30px;
+}
