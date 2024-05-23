@@ -56,6 +56,9 @@ h1 {
   #image-section {
     flex-direction: column;
   }
+  #responsiveImage {
+    max-width: 400px; /* minimum width in pixels */
+  }
   .toolbox-row {
     flex-direction: column;
     align-items: center;
@@ -76,6 +79,14 @@ h1 {
   .toolbox-button {
     margin-top: 1%;
     margin-bottom: 1%; 
+  }
+  #responsiveImage {
+    max-width: 275px;
+    max-height: 40vh;
+  }
+  h1 {
+    font-size: 40px;
+    text-align: center;
   }
 }
 
