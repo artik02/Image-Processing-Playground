@@ -66,7 +66,7 @@
 
     /* Roberts component */
     
-    const lblRoberts = Label('rangeGamma', getText('lblRoberts') + '1.0').Class('toolbox-label').Id('labelGamma');
+    const lblRoberts = Label('rangeGamma', getText('lblRoberts') + '128').Class('toolbox-label').Id('labelGamma');
     const rngRoberts = Input('range', '128').Att('min', '1').Att('max', '254').Att('step', '1').Class('toolbox-range').Id('rangeGamma')
       .Att('onchange', 'robertsFilter(rngRoberts.value);')
       .Att('oninput', 'lblRoberts.replaceChildren(getText("lblRoberts") + rngRoberts.value);');
