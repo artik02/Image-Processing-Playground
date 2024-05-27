@@ -4,145 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patio de juegos de Procesamiento de Imágenes</title>
-    <link rel="stylesheet" href="style.css">
     <script src="https://artik02.github.io/Yotta.js/yotta.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <script src="language.js"></script>
   <script src="image-processing.js"></script>
+  <script src="global.js"></script>
   <script type="text/javascript">
 
-    let language = 'es';
+    /* File input tag */
 
-    let openCV = false;
-    let imageR = false;
+    const fileSelector = Input('file').Id('fileSelector').Att('accept', 'image/*');
+    fileSelector.addEventListener('change', (e) => { fileSelectorChange(e); }, false);
 
-    const srcFile = Input('file').Id('sourceFile').Att('accept', 'image/*');
-    srcFile.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          resImage.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
-      } else {
-        alert('Please select an image file.');
-        e.target.value = null;
-      }
-    }, false);
+    /* Canvases tag */
 
-    const resImage = Img('').Id('responsiveImage');
-    resImage.onload = () => { imageReady(); };
-    window.onresize = setImageSize;
+    const imgHidden = Img('').Id('imageHidden').Att('style', 'display: none;');
+    imgHidden.onload = () => { imageReady(); };
 
-    const resCanvas = Canvas('').Id('responsiveCanvas');
+    const cnvSource = Canvas('').Class('responsive-canvas').Id('canvasSource');
+    const cnvPreview = Canvas('').Class('responsive-canvas').Id('canvasPreview');
 
-    const btnRestore = Button(H3(getText('btnRestore'))).Id('buttonRestore').Class('toolbox-button');
-    btnRestore.addEventListener('click', (e) => {
-      setOriginalImage();
-    });
+    /* App buttons */
 
-    const btnGrayscale = Button(H3(getText('btnGrayscale'))).Id('buttonGrayscale').Class('toolbox-button');
-    btnGrayscale.addEventListener('click', (e) => {
-      grayscaleImage();
-    })
+    const btnRestore = Button(H3(getText('btnRestore'))).Class('toolbox-button').Id('buttonRestore');
+    btnRestore.addEventListener('click', (e) => { restoreImage(); });
 
-    const btnMinimum = Button(H3(getText('btnMinimum'))).Id('buttonMinimum').Class('toolbox-button');
-    btnMinimum.addEventListener('click', (e) => {
-      minimumFilterImage();
-    })
+    const btnRestorePrev = Button(H3(getText('btnRestorePrev'))).Class('toolbox-button').Id('buttonRestorePrev');
+    btnRestorePrev.addEventListener('click', (e) => { restorePreview(); });
 
-    const lblGamma = Label('sourceGamma', getText('lblGamma') + '1').Id('labelGamma').Class('toolbox-label');
-    const srcGamma = Input('range', '1').Att('min', '0.1').Att('max', '4').Att('step', '0.05').Id('sourceGamma').Class('toolbox-range')
-    .Att('onchange', 'srcGammaOn();').Att('oninput', 'srcGammaOnLbl();');
-    function srcGammaOn() {
-      gammaCorrectionImage(srcGamma.value); 
-    };
-    function srcGammaOnLbl() {
-      lblGamma.replaceChildren(getText('lblGamma') + srcGamma.value);
-    };
+    const btnApply = Button(H3(getText('btnApply'))).Class('toolbox-button').Id('buttonApply');
+    btnApply.addEventListener('click', (e) => { applyChanges(); });
 
-    const lblGammaSource = Label('', getText('lblGammaSource') + 'Original').Class('toolbox-label');
-    const srcGammaSource = Input('checkbox').Id('sourceGammaSource').Class('toolbox-checkbox')
-    .Att('onchange', 'srcGammaSourceOn();');
-    function srcGammaSourceOn() {
-      lblGammaSource.replaceChildren(getText('lblGammaSource') + ((srcGammaSource.checked) ? getText('Modified') : getText('Original')));
-    };
+    /* Image Processing buttons */
 
-    const lblBinarization = Label('', getText('lblBinarization') + '127').Id('labelBinarization').Class('toolbox-label');
-    const srcBinarization = Input('range', '127').Att('min', '1').Att('max', '254').Att('step', '1').Id('sourceBinarization').Class('toolbox-range')
-    .Att('onchange', 'srcBinarizationOn();').Att('oninput', 'srcBinarizationOnLbl();');
-    function srcBinarizationOn() {
-      binarizationImage(srcBinarization.value);
-    };
-    function srcBinarizationOnLbl() {
-      lblBinarization.innerText = getText('lblBinarization') + srcBinarization.value;
-    };
+    const btnMinimum = Button(H3(getText('btnMinimum'))).Class('toolbox-button').Id('buttonMinimum');
+    btnMinimum.addEventListener('click', (e) => { minimumFilter(); });
 
-    const lblBinarizationSource = Label('sourceBinarizationSource', getText('lblBinarizationSource') + 'Original').Class('toolbox-label');
-    const srcBinarizationSource = Input('checkbox').Id('sourceBinarizationSource').Class('toolbox-checkbox')
-    .Att('onchange', 'srcBinarizationSourceOn();');
-    function srcBinarizationSourceOn() {
-      lblBinarizationSource.replaceChildren(getText('lblBinarizationSource') + (srcBinarizationSource.checked ? getText('Modified') : getText('Original')));
-    };
+    const btnGamma = Button(H3(getText('btnGamma'))).Class('toolbox-button').Id('buttonGamma');
+    btnGamma.addEventListener('click', (e) => { replaceToolbox(GammaArticle); });
 
-    function openCVReady() {
-      openCV = true;
-      document.getElementById('openCVHeader').remove();
-    }
+    const btnRoberts = Button(H3(getText('btnRoberts'))).Class('toolbox-button').Id('buttonRoberts');
+    btnRoberts.addEventListener('click', (e) => { replaceToolbox(RobertsArticle); });
 
-    function imageReady() {
-      imageR = true;
-      const intervalId = setInterval(() => {
-        if (openCV == true) {
-          document.getElementById('toolbox-section').setAttribute('style', '');
-          document.getElementById('image-section').setAttribute('style', '');
-          setOriginalImage();
-          clearInterval(intervalId);
-        }
-      }, 100);
-    }
+    /* Toolbox component container */
 
-    function setImageSize() {
-      resCanvas.offsetWidth = resImage.offsetWidth;
-      resCanvas.offsetHeight = resImage.offsetHeight;
-    }
+    const Toolbox = Section().Id('toolbox');
 
-    function setOriginalImage() {
-      if (imageR == false) return;
+    /* Gamma component */
 
-      setImageSize();
+    const lblGamma = Label('rangeGamma', getText('lblGamma') + '1.0').Class('toolbox-label').Id('labelGamma');
+    const rngGamma = Input('range', '1.0').Att('min', '0.1').Att('max', '2.0').Att('step', '0.05').Class('toolbox-range').Id('rangeGamma')
+      .Att('onchange', 'gammaCorrection(rngGamma.value);')
+      .Att('oninput', 'lblGamma.replaceChildren(getText("lblGamma") + rngGamma.value);');
 
-      let mat = cv.imread(resImage);
-      cv.imshow('responsiveCanvas', mat);
-      mat.delete();
-    }
+    const GammaArticle = Article(
+      lblGamma,
+      rngGamma,
+    ).Class('toolbox-component');
 
-    const ArticleGamma = Article(
-      lblGamma, srcGamma, Div(lblGammaSource, srcGammaSource).Class('toolbox-div').Press(() => {
-        srcGammaSource.click();
-      }),
-    ).Class('toolbox-row');
+    /* Roberts component */
+    
+    const lblRoberts = Label('rangeGamma', getText('lblRoberts') + '1.0').Class('toolbox-label').Id('labelGamma');
+    const rngRoberts = Input('range', '128').Att('min', '1').Att('max', '254').Att('step', '1').Class('toolbox-range').Id('rangeGamma')
+      .Att('onchange', 'robertsFilter(rngRoberts.value);')
+      .Att('oninput', 'lblRoberts.replaceChildren(getText("lblRoberts") + rngRoberts.value);');
+    
+    const RobertsArticle = Article(
+      lblRoberts,
+      rngRoberts,
+    ).Class('toolbox-component');
 
-    const ArticleBinarization = Article(
-      lblBinarization, srcBinarization, Div(lblBinarizationSource, srcBinarizationSource).Class('toolbox-div').Press(() => {
-        srcBinarizationSource.click();
-      }),
-    ).Class('toolbox-row');
+    /* UI components */
+      
+    const ToolboxCanvases = Section(
+      imgHidden,
+      Article(
+        H3(getText('lblSource')).Class('labelImages'),
+        cnvSource,
+      ).Class('toolboxImages'),
+      Article(
+        H3(getText('lblPreview')).Class('labelImages'),
+        cnvPreview,
+      ).Class('toolboxImages') ,
+    ).Id('toolboxCanvases').Att('style', 'display: none;');
 
-    const App = Yotta(Main(
-      Section(H1(getText('fileHeader')).Id('file-header'), srcFile, H1(getText('openCVHeader')).Id('openCVHeader')).Id('file-section'),
-      Section(resImage, resCanvas).Id('image-section').Att('style', 'display: none'),
-      Section(
-        Article(btnRestore, btnGrayscale, btnMinimum).Class('toolbox-button-row'),
-        ArticleGamma,
-        ArticleBinarization,
-      ).Id('toolbox-section').Att('style', 'display: none'),
-    ).Press(() => { if (imageR == false) { srcFile.click(); } })
+    const ToolboxButtons = Section(
+      btnRestore,
+      btnRestorePrev,
+      btnApply,
+    ).Id('toolboxButtons');
+
+    const ToolboxButtonsPro = Section(
+      btnGamma,
+      btnMinimum,
+      btnRoberts,
+    ).Id('toolboxButtons');
+
+    /* App structure */
+    
+    const MyHeader = Header(
+      Label('fileSelector', H1(getText('playgroundTitle') + '...').Att('style', 'text-align: center;').Id('playgroundTitle')),
+      fileSelector,
+    );
+
+    const MyMain = Main(
+      ToolboxCanvases,
+      Toolbox,
+      ToolboxButtons,
+      ToolboxButtonsPro,
+    );
+
+    const MyFooter = Footer(
+      P('(c) ', A('https://github.com/artik02/Image-Processing-Playground/', getText('playgroundTitle')), ' - 2024'),
+    );
+
+    /* App deployment */
+
+    const App = Yotta(
+      MyHeader,
+      MyMain,
+      MyFooter,
     );
 
     document.body.appendChild(App);
+
   </script>
   <script async src="https://docs.opencv.org/3.4.0/opencv.js" onload="openCVReady()"></script>
 </body>

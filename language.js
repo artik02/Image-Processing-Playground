@@ -1,34 +1,44 @@
 
+const languages = ['en', 'es'];
+
 const language_map = {
   'en': {
-    'fileHeader': 'Select an image',
+    'playgroundTitle': 'Image Processing Playground',
+    'fileSelector': 'Select an image',
     'openCVHeader': 'OpenCV.js is loading...',
-    'btnRestore': 'Restore the Image',
-    'btnGrayscale': 'Apply Grayscale',
-    'btnMinimum': 'Apply Minimum Filter',
-    'lblGamma': 'Gamma Correction: ',
-    'lblGammaSource': 'Gamma Correction Source: ',
-    'lblBinarization': 'Binarization Threshold: ',
-    'lblBinarizationSource': 'Binarization Source: ',
-    'Modified': 'Modified',
-    'Original': 'Original',
+    'btnApply': 'Apply changes',
+    'btnRestore': 'Restore image',
+    'btnRestorePrev': 'Restore preview',
+    'btnGrayscale': 'Apply grayscale',
+    'btnMinimum': 'Apply minimum filter',
+    'btnGamma': 'Gamma correction',
+    'btnRoberts': 'Roberts filter',
+    'lblGamma': 'Gamma value: ',
+    'lblBinarization': 'Binarization threshold: ',
+    'lblSource': 'Image',
+    'lblPreview': 'Preview',
+    'lblRoberts': 'Roberts threshold',
   },
   'es': {
-    'fileHeader': 'Elige una imagen',
+    'playgroundTitle': 'Patio de Juegos de Procesamiento de Imágenes',
+    'fileSelector': 'Elige una imagen',
     'openCVHeader': 'OpenCV.js esta cargando...',
-    'btnRestore': 'Restaurar la imagen',
+    'btnRestore': 'Restaurar imagen',
+    'btnRestorePrev': 'Restaurar previsualización',
+    'btnApply': 'Aplicar cambios',
     'btnGrayscale': 'Aplicar escala de grises',
     'btnMinimum': 'Aplicar filtro mínimo',
-    'lblGamma': 'Corrección Gamma: ',
-    'lblGammaSource': 'Imagen fuente para Corrección Gamma: ',
-    'lblBinarization': 'Umbral para la Binarización: ',
-    'lblBinarizationSource': 'Imagen fuente para la Binarización: ',
-    'Modified': 'Modificada',
-    'Original': 'Original',
+    'btnRoberts': 'Filtro de Roberts',
+    'btnGamma': 'Correción Gamma',
+    'lblGamma': 'Valor Gamma: ',
+    'lblBinarization': 'Umbral para la binarización: ',
+    'lblSource': 'Imagen',
+    'lblPreview': 'Previsualización',
+    'lblRoberts': 'Umbral de Roberts: ',
   },
 };
 
 function getText(key) {
-  initial = language_map[language][key];
+  initial = language_map[languages[language]][key];
   return initial ? initial : language_map['en'][key] ;
 }
