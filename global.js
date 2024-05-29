@@ -4,8 +4,8 @@ let language = 1;
 let openCV = false;
 let imageR = false;
 
-function replaceToolbox(article) {
-  Toolbox.replaceChildren(article);
+function replaceToolbox(box, article) {
+  box.replaceChildren(article);
 }
 
 function openCVReady() { 

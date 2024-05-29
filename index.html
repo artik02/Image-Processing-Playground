@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patio de juegos de Procesamiento de Imágenes</title>
-    <script src="https://artik02.github.io/Yotta.js/yotta.js"></script>
+    <script src="./yotta.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -37,26 +37,133 @@
     const btnApply = Button(H3(getText('btnApply'))).Class('toolbox-button').Id('buttonApply');
     btnApply.addEventListener('click', (e) => { applyChanges(); });
 
+    
+    const btnUniform = Button(H3(getText('btnUniform'))).Class('toolbox-button').Id('buttonUniform');
+    btnUniform.addEventListener('click', (e) => { uniformEqualization(); });
+        
+    const btnHyperbolic = Button(H3(getText('btnHyperbolic'))).Class('toolbox-button').Id('buttonEqualization');
+    btnHyperbolic.addEventListener('click', (e) => { hyperbolicEqualization(); });
+
+    const btnLogarithmic = Button(H3(getText('btnLogarithmic'))).Class('toolbox-button').Id('buttonLogarithmic');
+    btnLogarithmic.addEventListener('click', (e) => { hyperbolicLogarithmicEqualization(); });
+
+    const btnExponential = Button(H3(getText('btnExponential'))).Class('toolbox-button').Id('buttonExponential');
+    btnExponential.addEventListener('click', (e) => { exponentialEqualization(); });
+
     /* Image Processing buttons */
 
-    const btnMinimum = Button(H3(getText('btnMinimum'))).Class('toolbox-button').Id('buttonMinimum');
-    btnMinimum.addEventListener('click', (e) => { minimumFilter(); });
+    const btnHistogram = Button(H3(getText('btnHistogram'))).Class('toolbox-button').Id('buttonHistogram');
+    btnHistogram.addEventListener('click', (e) => { replaceToolbox(ToolboxDown, HistogramArticle) || rngHistogram.click(); });
 
+
+    const btnRayleigh = Button(H3(getText('btnRayleigh'))).Class('toolbox-button').Id('buttonRayleigh');
+    btnRayleigh.addEventListener('click', (e) => { replaceToolbox(Toolbox, RayleighArticle) || rngRayleigh.click(); });
+
+    const btnBinarization = Button(H3(getText('btnBinarization'))).Class('toolbox-button').Id('buttonBinarization');
+    btnBinarization.addEventListener('click', (e) => { replaceToolbox(Toolbox, BinarizationArticle) || rngBinarization.click(); });
+    
     const btnGamma = Button(H3(getText('btnGamma'))).Class('toolbox-button').Id('buttonGamma');
-    btnGamma.addEventListener('click', (e) => { replaceToolbox(GammaArticle); });
+    btnGamma.addEventListener('click', (e) => { replaceToolbox(Toolbox, GammaArticle) || rngGamma.click(); });
+
+    const btnTransform = Button(H3(getText('btnTransform'))).Class('toolbox-button').Id('buttonTransform');
+    btnTransform.addEventListener('click', (e) => { replaceToolbox(Toolbox, TransformArticle) || rngTransform.click(); });
+
+
+    const btnSobel = Button(H3(getText('btnSobel'))).Class('toolbox-button').Id('buttonSobel');
+    btnSobel.addEventListener('click', (e) => { replaceToolbox(Toolbox, SobelArticle) || rngSobel.click(); });
+
+    const btnPrewitt = Button(H3(getText('btnPrewitt'))).Class('toolbox-button').Id('buttonPrewitt');
+    btnPrewitt.addEventListener('click', (e) => { replaceToolbox(Toolbox, PrewittArticle) || rngPrewitt.click(); });
 
     const btnRoberts = Button(H3(getText('btnRoberts'))).Class('toolbox-button').Id('buttonRoberts');
-    btnRoberts.addEventListener('click', (e) => { replaceToolbox(RobertsArticle); });
+    btnRoberts.addEventListener('click', (e) => { replaceToolbox(Toolbox, RobertsArticle) || rngRoberts.click(); });
+
+    const btnLaplacian = Button(H3(getText('btnLaplacian'))).Class('toolbox-button').Id('buttonLaplacian');
+    btnLaplacian.addEventListener('click', (e) => { replaceToolbox(Toolbox, LaplacianArticle) || rngLaplacian.click(); });
+
+    const btnLaplacianNegative = Button(H3(getText('btnLaplacianNegative'))).Class('toolbox-button').Id('buttonLaplacianNegative');
+    btnLaplacianNegative.addEventListener('click', (e) => { replaceToolbox(Toolbox, LaplacianNegativeArticle) || rngLaplacianNegative.click(); });
+
+    const btnKirsch = Button(H3(getText('btnKirsch'))).Class('toolbox-button').Id('buttonKirsch');
+    btnKirsch.addEventListener('click', (e) => { replaceToolbox(Toolbox, KirschArticle) || rngKirsch.click(); });
+
+    const btnRobinson = Button(H3(getText('btnRobinson'))).Class('toolbox-button').Id('buttonRobinson');
+    btnRobinson.addEventListener('click', (e) => { replaceToolbox(Toolbox, RobinsonArticle) || rngRobinson.click(); });
+
+
+    const btnMedian = Button(H3(getText('btnMedian'))).Class('toolbox-button').Id('buttonMedian');
+    btnMedian.addEventListener('click', (e) => { replaceToolbox(Toolbox, MedianArticle) || rngMedian.click(); });
+
+    const btnMode = Button(H3(getText('btnMode'))).Class('toolbox-button').Id('buttonMode');
+    btnMode.addEventListener('click', (e) => { replaceToolbox(Toolbox, ModeArticle) || rngMode.click(); });
+
+    const btnMaximum = Button(H3(getText('btnMaximum'))).Class('toolbox-button').Id('buttonMaximum');
+    btnMaximum.addEventListener('click', (e) => { replaceToolbox(Toolbox, MaximumArticle) || rngMaximum.click(); });
+
+    const btnMinimum = Button(H3(getText('btnMinimum'))).Class('toolbox-button').Id('buttonMinimum');
+    btnMinimum.addEventListener('click', (e) => { replaceToolbox(Toolbox, MinimumArticle) || rngMinimum.click(); });
+
+    const btnAverage = Button(H3(getText('btnAverage'))).Class('toolbox-button').Id('buttonAverage');
+    btnAverage.addEventListener('click', (e) => { replaceToolbox(Toolbox, AverageArticle) || rngAverage.click(); });
+
+    const btnHeavy = Button(H3(getText('btnHeavy'))).Class('toolbox-button').Id('buttonHeavy');
+    btnHeavy.addEventListener('click', (e) => { replaceToolbox(Toolbox, HeavyArticle) || rngHeavy.click(); });
+
+    const btnGaussian = Button(H3(getText('btnGaussian'))).Class('toolbox-button').Id('buttonGaussian');
+    btnGaussian.addEventListener('click', (e) => { replaceToolbox(Toolbox, GaussianArticle) || rngGaussian.click(); });
 
     /* Toolbox component container */
 
     const Toolbox = Section().Id('toolbox');
+    const ToolboxDown = Section().Id('toolbox-down');
+
+    /* Histogram component */
+
+    const lblHistogram = Label('rangeHistogram', getText('lblHistogram') + '15').Class('toolbox-label').Id('labelHistogram');
+    const rngHistogram = Input('range', '15').Att('min', '5').Att('max', '25').Att('step', '1').Class('toolbox-range').Id('rangeHistogram')
+      .Att('onchange', 'histogram(rngHistogram.value);')
+      .Att('onclick', 'histogram(rngHistogram.value);')
+      .Att('oninput', 'lblHistogram.replaceChildren(getText("lblHistogram") + rngHistogram.value);');
+    const cnvHistogram = Canvas('').Class('concrete-canvas').Id('canvasHistogram');
+
+    const HistogramArticle = Article(
+      lblHistogram,
+      rngHistogram,
+      cnvHistogram,
+    ).Class('toolbox-component');
+
+    /* Binarization component */
+
+    const lblBinarization = Label('rangeBinarization', getText('lblBinarization') + '128').Class('toolbox-label').Id('labelBinarization');
+    const rngBinarization = Input('range', '128').Att('min', '1').Att('max', '254').Att('step', '1').Class('toolbox-range').Id('rangeBinarization')
+      .Att('onchange', 'binarization(rngBinarization.value);')
+      .Att('onclick', 'binarization(rngBinarization.value);')
+      .Att('oninput', 'lblBinarization.replaceChildren(getText("lblBinarization") + rngBinarization.value);');
+
+    const BinarizationArticle = Article(
+      lblBinarization,
+      rngBinarization,
+    ).Class('toolbox-component');
+
+    /* Rayleigh component */
+
+    const lblRayleigh = Label('rangeRayleigh', getText('lblRayleigh') + '5').Class('toolbox-label').Id('labelRayleigh');
+    const rngRayleigh = Input('range', '5').Att('min', '1').Att('max', '15').Att('step', '1').Class('toolbox-range').Id('rangeRayleigh')
+      .Att('onchange', 'rayleighEqualization(rngRayleigh.value);')
+      .Att('onclick', 'rayleighEqualization(rngRayleigh.value);')
+      .Att('oninput', 'lblRayleigh.replaceChildren(getText("lblRayleigh") + rngRayleigh.value);');
+
+    const RayleighArticle = Article(
+      lblRayleigh,
+      rngRayleigh,
+    ).Class('toolbox-component');
 
     /* Gamma component */
 
     const lblGamma = Label('rangeGamma', getText('lblGamma') + '1.0').Class('toolbox-label').Id('labelGamma');
     const rngGamma = Input('range', '1.0').Att('min', '0.1').Att('max', '2.0').Att('step', '0.05').Class('toolbox-range').Id('rangeGamma')
       .Att('onchange', 'gammaCorrection(rngGamma.value);')
+      .Att('onclick', 'gammaCorrection(rngGamma.value);')
       .Att('oninput', 'lblGamma.replaceChildren(getText("lblGamma") + rngGamma.value);');
 
     const GammaArticle = Article(
@@ -64,11 +171,51 @@
       rngGamma,
     ).Class('toolbox-component');
 
+    /* Transform component */
+
+    const lblTransform = Label('rangeTransform', getText('lblTransform') + '1').Class('toolbox-label').Id('labelTransform');
+    const rngTransform = Input('range', '1').Att('min', '1').Att('max', '2').Att('step', '1').Class('toolbox-range').Id('rangeTransform')
+      .Att('onchange', 'gammaCorrection(rngTransform.value);')
+      .Att('onclick', 'gammaCorrection(rngTransform.value);')
+      .Att('oninput', 'lblTransform.replaceChildren(getText("lblTransform") + rngTransform.value);');
+
+    const TransformArticle = Article(
+      lblTransform,
+      rngTransform,
+    ).Class('toolbox-component');
+
+    /* Sobel component */
+
+    const lblSobel = Label('rangeSobel', getText('lblSobel') + '128').Class('toolbox-label').Id('labelSobel');
+    const rngSobel = Input('range', '128').Att('min', '1').Att('max', '254').Att('step', '1').Class('toolbox-range').Id('rangeSobel')
+      .Att('onchange', 'sobelFilter(rngSobel.value);')
+      .Att('onclick', 'sobelFilter(rngSobel.value);')
+      .Att('oninput', 'lblSobel.replaceChildren(getText("lblSobel") + rngSobel.value);');
+    
+    const SobelArticle = Article(
+      lblSobel,
+      rngSobel,
+    ).Class('toolbox-component');
+
+    /* Prewitt component */
+
+    const lblPrewitt = Label('rangePrewitt', getText('lblPrewitt') + '128').Class('toolbox-label').Id('labelPrewitt');
+    const rngPrewitt = Input('range', '128').Att('min', '1').Att('max', '254').Att('step', '1').Class('toolbox-range').Id('rangePrewitt')
+      .Att('onchange', 'prewittFilter(rngPrewitt.value);')
+      .Att('onclick', 'prewittFilter(rngPrewitt.value);')
+      .Att('oninput', 'lblPrewitt.replaceChildren(getText("lblPrewitt") + rngPrewitt.value);');
+    
+    const PrewittArticle = Article(
+      lblPrewitt,
+      rngPrewitt,
+    ).Class('toolbox-component');
+
     /* Roberts component */
     
     const lblRoberts = Label('rangeGamma', getText('lblRoberts') + '128').Class('toolbox-label').Id('labelGamma');
     const rngRoberts = Input('range', '128').Att('min', '1').Att('max', '254').Att('step', '1').Class('toolbox-range').Id('rangeGamma')
       .Att('onchange', 'robertsFilter(rngRoberts.value);')
+      .Att('onclick', 'robertsFilter(rngRoberts.value);')
       .Att('oninput', 'lblRoberts.replaceChildren(getText("lblRoberts") + rngRoberts.value);');
     
     const RobertsArticle = Article(
@@ -76,8 +223,158 @@
       rngRoberts,
     ).Class('toolbox-component');
 
+    /* Laplacian component */
+    
+    const lblLaplacian = Label('rangeGamma', getText('lblLaplacian') + '128').Class('toolbox-label').Id('labelGamma');
+    const rngLaplacian = Input('range', '128').Att('min', '1').Att('max', '254').Att('step', '1').Class('toolbox-range').Id('rangeGamma')
+      .Att('onchange', 'robertsFilter(rngLaplacian.value);')
+      .Att('onclick', 'robertsFilter(rngLaplacian.value);')
+      .Att('oninput', 'lblLaplacian.replaceChildren(getText("lblLaplacian") + rngLaplacian.value);');
+    
+    const LaplacianArticle = Article(
+      lblLaplacian,
+      rngLaplacian,
+    ).Class('toolbox-component');
+
+    /* Laplacian Negative component */
+    
+    const lblLaplacianNegative = Label('rangeGamma', getText('lblLaplacianNegative') + '128').Class('toolbox-label').Id('labelGamma');
+    const rngLaplacianNegative = Input('range', '128').Att('min', '1').Att('max', '254').Att('step', '1').Class('toolbox-range').Id('rangeGamma')
+      .Att('onchange', 'laplacianNegativeFilter(rngLaplacianNegative.value);')
+      .Att('onclick', 'laplacianNegativeFilter(rngLaplacianNegative.value);')
+      .Att('oninput', 'lblLaplacianNegative.replaceChildren(getText("lblLaplacianNegative") + rngLaplacianNegative.value);');
+    
+    const LaplacianNegativeArticle = Article(
+      lblLaplacianNegative,
+      rngLaplacianNegative,
+    ).Class('toolbox-component');
+
+    /* Kirsch component */
+    
+    const lblKirsch = Label('rangeGamma', getText('lblKirsch') + '128').Class('toolbox-label').Id('labelGamma');
+    const rngKirsch = Input('range', '128').Att('min', '1').Att('max', '254').Att('step', '1').Class('toolbox-range').Id('rangeGamma')
+      .Att('onchange', 'robertsFilter(rngKirsch.value);')
+      .Att('onclick', 'robertsFilter(rngKirsch.value);')
+      .Att('oninput', 'lblKirsch.replaceChildren(getText("lblKirsch") + rngKirsch.value);');
+    
+    const KirschArticle = Article(
+      lblKirsch,
+      rngKirsch,
+    ).Class('toolbox-component');
+
+    /* Robinson component */
+    
+    const lblRobinson = Label('rangeGamma', getText('lblRobinson') + '128').Class('toolbox-label').Id('labelGamma');
+    const rngRobinson = Input('range', '128').Att('min', '1').Att('max', '254').Att('step', '1').Class('toolbox-range').Id('rangeGamma')
+      .Att('onchange', 'robinsonFilter(rngRobinson.value);')
+      .Att('onclick', 'robinsonFilter(rngRobinson.value);')
+      .Att('oninput', 'lblRobinson.replaceChildren(getText("lblRobinson") + rngRobinson.value);');
+    
+    const RobinsonArticle = Article(
+      lblRobinson,
+      rngRobinson,
+    ).Class('toolbox-component');
+
+    /* Median filter component */
+
+    const lblMedian = Label('rangeMedian', getText('lblMedian') + '3').Class('toolbox-label').Id('labelMedian');
+    const rngMedian = Input('range', '3').Att('min', '3').Att('max', '7').Att('step', '2').Class('toolbox-range').Id('rangeMedian')
+      .Att('onchange', 'medianFilter(rngMedian.value);')
+      .Att('onclick', 'medianFilter(rngMedian.value);')
+      .Att('oninput', 'lblMedian.replaceChildren(getText("lblMedian") + rngMedian.value);');
+
+    const MedianArticle = Article(
+      lblMedian,
+      rngMedian,
+    ).Class('toolbox-component');
+
+    /* Mode filter component */
+
+    const lblMode = Label('rangeMode', getText('lblMode') + '3').Class('toolbox-label').Id('labelMode');
+    const rngMode = Input('range', '3').Att('min', '3').Att('max', '7').Att('step', '2').Class('toolbox-range').Id('rangeMode')
+      .Att('onchange', 'modeFilter(rngMode.value);')
+      .Att('onclick', 'modeFilter(rngMode.value);')
+      .Att('oninput', 'lblMode.replaceChildren(getText("lblMode") + rngMode.value);');
+
+    const ModeArticle = Article(
+      lblMode,
+      rngMode,
+    ).Class('toolbox-component');
+
+    /* Maximum filter component */
+
+    const lblMaximum = Label('rangeMaximum', getText('lblMaximum') + '3').Class('toolbox-label').Id('labelMaximum');
+    const rngMaximum = Input('range', '3').Att('min', '3').Att('max', '7').Att('step', '2').Class('toolbox-range').Id('rangeMaximum')
+      .Att('onchange', 'modeFilter(rngMaximum.value);')
+      .Att('onclick', 'modeFilter(rngMaximum.value);')
+      .Att('oninput', 'lblMaximum.replaceChildren(getText("lblMaximum") + rngMaximum.value);');
+
+    const MaximumArticle = Article(
+      lblMaximum,
+      rngMaximum,
+    ).Class('toolbox-component');
+
+    /* Minimum filter component */
+
+    const lblMinimum = Label('rangeMinimum', getText('lblMinimum') + '3').Class('toolbox-label').Id('labelMinimum');
+    const rngMinimum = Input('range', '3').Att('min', '3').Att('max', '7').Att('step', '2').Class('toolbox-range').Id('rangeMinimum')
+      .Att('onchange', 'minimumFilter(rngMinimum.value);')
+      .Att('onclick', 'minimumFilter(rngMinimum.value);')
+      .Att('oninput', 'lblMinimum.replaceChildren(getText("lblMinimum") + rngMinimum.value);');
+
+    const MinimumArticle = Article(
+      lblMinimum,
+      rngMinimum,
+    ).Class('toolbox-component');
+
+    /* Average filter component */
+
+    const lblAverage = Label('rangeAverage', getText('lblAverage') + '3').Class('toolbox-label').Id('labelAverage');
+    const rngAverage = Input('range', '3').Att('min', '3').Att('max', '7').Att('step', '2').Class('toolbox-range').Id('rangeAverage')
+      .Att('onchange', 'averageFilter(rngAverage.value);')
+      .Att('onclick', 'averageFilter(rngAverage.value);')
+      .Att('oninput', 'lblAverage.replaceChildren(getText("lblAverage") + rngAverage.value);');
+
+    const AverageArticle = Article(
+      lblAverage,
+      rngAverage,
+    ).Class('toolbox-component');
+
+    /* Heavy average filter component */
+
+    const lblHeavy = Label('rangeHeavy', getText('lblHeavy') + '3').Class('toolbox-label').Id('labelHeavy');
+    const rngHeavy = Input('range', '3').Att('min', '3').Att('max', '7').Att('step', '2').Class('toolbox-range').Id('rangeHeavy')
+      .Att('onchange', 'heavyAverageFilter(rngHeavy.value);')
+      .Att('onclick', 'heavyAverageFilter(rngHeavy.value);')
+      .Att('oninput', 'lblHeavy.replaceChildren(getText("lblHeavy") + rngHeavy.value);');
+
+    const HeavyArticle = Article(
+      lblHeavy,
+      rngHeavy,
+    ).Class('toolbox-component');
+
+    /* Gaussian filter component */
+
+    const lblGaussian = Label('rangeGaussian', getText('lblGaussian') + '3').Class('toolbox-label').Id('labelGaussian');
+    const rngGaussian = Input('range', '3').Att('min', '3').Att('max', '7').Att('step', '2').Class('toolbox-range').Id('rangeGaussian')
+      .Att('onchange', 'gaussianFilter(rngGaussian.value, rngGaussianSigma.value);')
+      .Att('onclick', 'gaussianFilter(rngGaussian.value, rngGaussianSigma.value);')
+      .Att('oninput', 'lblGaussian.replaceChildren(getText("lblGaussian") + rngGaussian.value);');
+    const lblGaussianSigma = Label('rangeGaussianSigma', getText('lblGaussianSigma') + '2.5').Class('toolbox-label').Id('labelGaussianSigma');
+    const rngGaussianSigma = Input('range', '2.5').Att('min', '0.5').Att('max', '7.5').Att('step', '0.5').Class('toolbox-range').Id('rangeGaussianSigma')
+    .Att('onchange', 'gaussianFilter(rngGaussian.value, rngGaussianSigma.value);')
+      .Att('onclick', 'gaussianFilter(rngGaussian.value, rngGaussianSigma.value);')
+      .Att('oninput', 'lblGaussianSigma.replaceChildren(getText("lblGaussianSigma") + rngGaussianSigma.value);');
+
+    const GaussianArticle = Article(
+      lblGaussian,
+      rngGaussian,
+      lblGaussianSigma,
+      rngGaussianSigma,
+    ).Class('toolbox-component');
+
     /* UI components */
-      
+
     const ToolboxCanvases = Section(
       imgHidden,
       Article(
@@ -94,12 +391,32 @@
       btnRestore,
       btnRestorePrev,
       btnApply,
+      btnHistogram,
     ).Id('toolboxButtons');
 
     const ToolboxButtonsPro = Section(
+      btnUniform,
+      btnHyperbolic,
+      btnLogarithmic,
+      btnExponential,
+      btnRayleigh,
       btnGamma,
-      btnMinimum,
+      btnTransform,
+      btnBinarization,
+      btnSobel,
+      btnPrewitt,
       btnRoberts,
+      btnLaplacian,
+      btnLaplacianNegative,
+      btnKirsch,
+      btnRobinson,
+      btnMedian,
+      btnMode,
+      btnMaximum,
+      btnMinimum,
+      btnAverage,
+      btnHeavy,
+      btnGaussian,
     ).Id('toolboxButtons');
 
     /* App structure */
@@ -114,6 +431,7 @@
       Toolbox,
       ToolboxButtons,
       ToolboxButtonsPro,
+      ToolboxDown,
     );
 
     const MyFooter = Footer(
@@ -131,6 +449,6 @@
     document.body.appendChild(App);
 
   </script>
-  <script async src="https://docs.opencv.org/3.4.0/opencv.js" onload="openCVReady()"></script>
+  <script async src="./opencv.js" onload="openCVReady()"></script>
 </body>
 </html>

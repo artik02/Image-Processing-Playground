@@ -50,16 +50,25 @@ header, main, footer {
   min-width: 30vw;
 }
 
+.concrete-canvas {
+  height: 40vh;
+  width: 45vw;
+}
+
 #toolboxButtons {
+  max-width: 70%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  margin-bottom: 20px;
+  overflow: auto;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 #toolboxButtons > *:not(:last-child) {
   margin-right: 20px;
+}
+
+.toolbox-button {
+  min-width: 150px;
 }
 
 .toolbox-label {
@@ -77,6 +86,7 @@ header, main, footer {
 
 .toolbox-range {
   width: 500px;
+  margin-bottom: 10px;
 }
 
 /* MOBILE */
@@ -86,9 +96,16 @@ header, main, footer {
     max-width: 80vw;
     min-width: 60vw;
   }
+  .concrete-canvas {
+    height: 40vh;
+    width: 80vw;
+  }
   #toolboxCanvases, #toolboxButtons {
     flex-direction: column;
     align-items: center;
+    height: 200px;
+    padding-right: 15px;
+    margin-bottom: 30px;
   }
   #toolboxButtons > *:not(:last-child) {
     margin-bottom: 10px;
