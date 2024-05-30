@@ -37,6 +37,9 @@
     const btnApply = Button(H3(getText('btnApply'))).Class('toolbox-button').Id('buttonApply');
     btnApply.addEventListener('click', (e) => { applyChanges(); });
 
+    const btnSave = Button(H3(getText('btnSave'))).Class('toolbox-button').Id('buttonSave');
+    btnSave.addEventListener('click', (e) => { saveImage(); });
+
     
     const btnUniform = Button(H3(getText('btnUniform'))).Class('toolbox-button').Id('buttonUniform');
     btnUniform.addEventListener('click', (e) => { uniformEqualization(); });
@@ -392,6 +395,7 @@
       btnRestorePrev,
       btnApply,
       /*btnHistogram,*/
+      btnSave,
     ).Id('toolboxButtons');
 
     const ToolboxButtonsPro = Section(

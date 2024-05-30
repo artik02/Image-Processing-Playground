@@ -12,6 +12,7 @@ const language_map = {
     'btnRestore': 'Restore image',
     'btnRestorePrev': 'Restore preview',
     'btnApply': 'Apply changes',
+    'btnSave': 'Save image',
 
     'btnHistogram': 'Show histogram',
     'lblHistogram': 'Histogram columns:',
@@ -71,6 +72,7 @@ const language_map = {
     'btnRestore': 'Restaurar imagen',
     'btnRestorePrev': 'Restaurar previsualización',
     'btnApply': 'Aplicar cambios',
+    'btnSave': 'Guardar imagen',
     
     'btnHistogram': 'Mostrar histograma',
     'lblHistogram': 'Columnas del histograma: ',

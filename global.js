@@ -79,3 +79,12 @@ function applyChanges() {
   let imgData = cnvPreview.getContext('2d').getImageData(0, 0, cnvPreview.width, cnvPreview.height);
   cnvSource.getContext('2d').putImageData(imgData, 0, 0);
 }
+
+function saveImage() {
+  if (!imageR) return;
+  const dataURL = cnvSource.toDataURL('image/png');
+  const link = document.createElement('a');
+  link.download = 'ipp_image.png';
+  link.href = dataURL;
+  link.click();
+}
