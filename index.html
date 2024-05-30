@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patio de juegos de Procesamiento de Imágenes</title>
-    <script src="https://artik02.github.io/Yotta.js/yotta.js"></script>
+    <script src="./yotta.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -391,7 +391,7 @@
       btnRestore,
       btnRestorePrev,
       btnApply,
-      btnHistogram,
+      /*btnHistogram,*/
     ).Id('toolboxButtons');
 
     const ToolboxButtonsPro = Section(
@@ -420,10 +420,24 @@
     ).Id('toolboxButtons');
 
     /* App structure */
-    
+
+    const btnTheme = Button(Img('sun_32x32.png')).Class('header-button').Id('buttonTheme').Att('style', 'margin-left: 20px');
+    btnTheme.addEventListener('click', (e) => {
+      document.body.classList.toggle('light-mode');
+      const imgElement = btnTheme.querySelector('img');
+      if (document.body.classList.contains('light-mode')) {
+        imgElement.src = 'moon_32x32.png';
+      } else {
+        imgElement.src = 'sun_32x32.png';
+      }
+    });
+
     const MyHeader = Header(
       Label('fileSelector', H1(getText('playgroundTitle') + '...').Att('style', 'text-align: center;').Id('playgroundTitle')),
-      fileSelector,
+      Article(
+        btnTheme,
+        fileSelector, 
+      ).Id('headerArticle'),
     );
 
     const MyMain = Main(
@@ -445,10 +459,10 @@
       MyMain,
       MyFooter,
     );
-
+    
     document.body.appendChild(App);
 
   </script>
-  <script async src="https://docs.opencv.org/3.4.0/opencv.js" onload="openCVReady()"></script>
+  <script async src="./opencv.js" onload="openCVReady()"></script>
 </body>
 </html>

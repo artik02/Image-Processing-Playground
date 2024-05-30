@@ -33,10 +33,10 @@ function histogram(no_col) {
 
       c.clearRect(0, 0, w, h);
 
-      c.fillStyle = 'purple';
+      let anchorColor = getComputedStyle(document.documentElement).getPropertyValue('--anchor-color').trim();
+      c.fillStyle = anchorColor || 'purple';
 
       let dx = w / no_col;
-
       let pad = 1;
 
       for (let i = 0; i < no_col; i++) {

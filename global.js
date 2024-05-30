@@ -15,16 +15,18 @@ function openCVReady() {
 
 function fileSelectorChange(e) {
   const file = e.target.files[0];
-  if (file.type.startsWith('image/')) {
+  if (file && file.type.startsWith('image/')) {
     const reader = new FileReader();
     reader.onload = function(event) {
       imgHidden.src = event.target.result;
     };
     reader.readAsDataURL(file);
     document.getElementById('toolboxCanvases').setAttribute('style', '');
+    e.target.style.border = 'none';
   } else {
     alert('Please select an image file.');
     e.target.value = null;
+    e.target.style.border = '1px solid var(--text-color)';
   }
 }
 

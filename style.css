@@ -1,4 +1,69 @@
 
+/* Color themes */
+
+:root {
+  --bg-color: #282828;
+  --text-color: #e0e0e0;
+  --btn-bg-color: #444444;
+  --btn-text-color: #ffffff;
+  --anchor-color: #c454f8;
+  --input-bg-color: #444444;
+  --input-text-color: #e0e0e0;
+}
+
+.light-mode {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --btn-bg-color: #808080;
+  --btn-text-color: #ffffff;
+  --anchor-color: #0000ff;
+  --input-bg-color: #ffffff;
+  --input-text-color: #000000;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button, input[type="file"], input[type="range"] {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button {
+  background-color: var(--btn-bg-color);
+  color: var(--btn-text-color);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+a {
+  color: var(--anchor-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+input[type="file"] {
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  border: 1px solid var(--text-color);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* View styles */
+
 body {
   width: 98vw;
   min-height: 98vh;
@@ -15,6 +80,18 @@ header, main, footer {
   align-items: center;
   flex-direction: column;
   margin-bottom: 20px;
+}
+
+#headerArticle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+#headerArticle > button {
+  margin-right: 20px;
+  padding: 10px;
 }
 
 #fileSelector {
@@ -99,6 +176,13 @@ header, main, footer {
   .concrete-canvas {
     height: 40vh;
     width: 80vw;
+  }
+  #headerArticle {
+    flex-direction: column;
+  }
+  #headerArticle > button {
+    margin-bottom: 20px;
+    margin-right: 0px;
   }
   #toolboxCanvases {
     flex-direction: column;
