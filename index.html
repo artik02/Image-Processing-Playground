@@ -40,7 +40,7 @@
     const btnSave = Button(H3(getText('btnSave'))).Class('toolbox-button').Id('buttonSave');
     btnSave.addEventListener('click', (e) => { saveImage(); });
 
-    
+
     const btnUniform = Button(H3(getText('btnUniform'))).Class('toolbox-button').Id('buttonUniform');
     btnUniform.addEventListener('click', (e) => { uniformEqualization(); });
         
@@ -72,6 +72,9 @@
     btnTransform.addEventListener('click', (e) => { replaceToolbox(Toolbox, TransformArticle) || rngTransform.click(); });
 
 
+    const btnChannel = Button(H3(getText('btnChannel'))).Class('toolbox-button').Id('buttonChannel');
+    btnChannel.addEventListener('click', (e) => { replaceToolbox(Toolbox, ChannelArticle) || rngChannel.click(); });
+    
     const btnSobel = Button(H3(getText('btnSobel'))).Class('toolbox-button').Id('buttonSobel');
     btnSobel.addEventListener('click', (e) => { replaceToolbox(Toolbox, SobelArticle) || rngSobel.click(); });
 
@@ -185,6 +188,19 @@
     const TransformArticle = Article(
       lblTransform,
       rngTransform,
+    ).Class('toolbox-component');
+
+    /* Channel component */
+
+    const lblChannel = Label('rangeChannel', getText('lblChannel') + '128').Class('toolbox-label').Id('labelChannel');
+    const rngChannel = Input('range', '128').Att('min', '1').Att('max', '254').Att('step', '1').Class('toolbox-range').Id('rangeChannel')
+      .Att('onchange', 'channel(rngChannel.value);')
+      .Att('onclick', 'channel(rngChannel.value);')
+      .Att('oninput', 'lblChannel.replaceChildren(getText("lblChannel") + rngChannel.value);');
+    
+    const ChannelArticle = Article(
+      lblChannel,
+      rngChannel,
     ).Class('toolbox-component');
 
     /* Sobel component */
@@ -399,6 +415,8 @@
     ).Id('toolboxButtons');
 
     const ToolboxButtonsPro = Section(
+      btnBinarization,
+      btnChannel,
       btnUniform,
       btnHyperbolic,
       btnLogarithmic,
@@ -406,7 +424,6 @@
       btnRayleigh,
       btnGamma,
       btnTransform,
-      btnBinarization,
       btnSobel,
       btnPrewitt,
       btnRoberts,

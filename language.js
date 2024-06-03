@@ -31,6 +31,8 @@ const language_map = {
     
     'btnBinarization': 'Binarization',
     'lblBinarization': 'Binarization threshold: ',
+    'btnChannel': 'Channel binarization',
+    'lblChannel': 'Channel threshold: ',
     'btnSobel': 'Sobel filter',
     'lblSobel': 'Sobel threshold: ',
     'btnPrewitt': 'Prewitt filter',
@@ -91,6 +93,8 @@ const language_map = {
     
     'btnBinarization': 'Binarización',
     'lblBinarization': 'Umbral de binarización: ',
+    'btnChannel': 'Binarización de canal',
+    'lblChannel': 'Umbral del canal: ',
     'btnSobel': 'Filtro de Sobel',
     'lblSobel': 'Umbral de Sobel: ',
     'btnPrewitt': 'Filtro de Prewitt',

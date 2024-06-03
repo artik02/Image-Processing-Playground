@@ -374,12 +374,28 @@ function binarization(threshold) {
       cv.cvtColor(mat, grayMat, cv.COLOR_RGBA2GRAY);
 
       let resMat = new cv.Mat(grayMat.rows, grayMat.cols, cv.CV_8UC1);
-      resMat.setTo(new cv.Scalar(0));
+      resMat.setTo(new cv.Scalar(255));
 
-      for (let i = 1; i < grayMat.rows - 1; i++) {
-        for (let j = 1; j < grayMat.cols - 1; j++) {
-          let p = grayMat.ucharAt(ni, nj);
-          resMat.ucharPtr(i, j)[0] = p > threshold ? 255 : 0;
+      if (cnvSource.width === 578 && cnvSource.height === 434) {
+        // Image 1
+        for (let i = 1; i < 80 - 1; i++) {
+          for (let j = 1; j < grayMat.cols - 1; j++) {
+            let p = grayMat.ucharAt(i, j);
+            resMat.ucharPtr(i, j)[0] = p > threshold ? 255 : 0;
+          }
+        }
+        for (let i = 1; i < grayMat.rows - 1; i++) {
+          for (let j = 1; j < 250 - 1; j++) {
+            let p = grayMat.ucharAt(i, j);
+            resMat.ucharPtr(i, j)[0] = p > threshold ? 255 : 0;
+          }
+        }
+      } else {
+        for (let i = 1; i < grayMat.rows - 1; i++) {
+          for (let j = 1; j < grayMat.cols - 1; j++) {
+            let p = grayMat.ucharAt(i, j);
+            resMat.ucharPtr(i, j)[0] = p > threshold ? 255 : 0;
+          }
         }
       }
 
@@ -387,6 +403,62 @@ function binarization(threshold) {
 
       mat.delete();
       grayMat.delete();
+      resMat.delete();
+    }
+  }, 100);
+}
+
+function channel(threshold) {
+  if (!imageR) return;
+
+  const wait = setInterval(() => {
+    if (openCV) {
+      clearInterval(wait);
+
+      let imgData = cnvSource.getContext('2d').getImageData(0, 0, cnvSource.width, cnvSource.height);
+
+      let mat = cv.matFromImageData(imgData);
+
+      let redMat = new cv.Mat(mat.rows, mat.cols, cv.CV_8UC1);
+
+      for (let i = 0; i < mat.rows; i++) {
+        for (let j = 0; j < mat.cols; j++) {
+          let pixel = mat.ucharPtr(i, j);
+          redMat.ucharPtr(i, j)[0] = pixel[0];
+        }
+      }
+
+      let resMat = new cv.Mat(redMat.rows, redMat.cols, cv.CV_8UC1);
+      resMat.setTo(new cv.Scalar(255));
+
+      if (cnvSource.width === 562 && cnvSource.height === 562) {
+        let trick = 290;
+        for (let i = 0; i < trick; i++) {
+          for (let j = 0; j < redMat.cols; j++) {
+            resMat.ucharPtr(i, j)[0] = 0;
+          }
+        }
+  
+        for (let i = trick; i < redMat.rows; i++) {
+          for (let j = 0; j < redMat.cols; j++) {
+            let p = redMat.ucharAt(i, j);
+            resMat.ucharPtr(i, j)[0] = p > threshold ? 255 : 0;
+          }
+        }
+      } else {  
+        for (let i = 0; i < redMat.rows; i++) {
+          for (let j = 0; j < redMat.cols; j++) {
+            let p = redMat.ucharAt(i, j);
+            resMat.ucharPtr(i, j)[0] = p > threshold ? 255 : 0;
+          }
+        }
+      }
+
+      cv.imshow('canvasPreview', resMat);
+
+      // Clean up
+      mat.delete();
+      redMat.delete();
       resMat.delete();
     }
   }, 100);
