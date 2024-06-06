@@ -385,7 +385,7 @@ function binarization(threshold) {
           }
         }
         for (let i = 1; i < grayMat.rows - 1; i++) {
-          for (let j = 1; j < 250 - 1; j++) {
+          for (let j = 28; j < 250 - 1; j++) {
             let p = grayMat.ucharAt(i, j);
             resMat.ucharPtr(i, j)[0] = p > threshold ? 255 : 0;
           }
