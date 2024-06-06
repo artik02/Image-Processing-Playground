@@ -1,51 +1,50 @@
+# Patio de Procesamiento de Imágenes
 
-# Image Processing Playground
+¡Bienvenido al Patio de Procesamiento de Imágenes! Esta aplicación web permite a los usuarios cargar una imagen y aplicar varias técnicas de procesamiento de imágenes utilizando OpenCV.js. La aplicación admite la conversión a escala de grises, la corrección gamma, la aplicación de filtro mínimo y la binarización. Está diseñada para ser simple e intuitiva para usuarios de todos los niveles de habilidad.
 
-Welcome to the Image Processing Playground! This web application allows users to upload an image and apply various image processing techniques using OpenCV.js. The application supports grayscale conversion, gamma correction, minimum filter application, and binarization. It is designed to be simple and intuitive for users of all skill levels.
+## Accede a la Aplicación
 
-## Access the Application
+La aplicación está disponible en línea en [Patio de Procesamiento de Imágenes](https://artik02.github.io/Image-Processing-Playground).
 
-The application is available online at [Image Processing Playground](https://artik02.github.io/Image-Processing-Playground).
+## Características
 
-## Features
+- **Carga de Imágenes**: Carga cualquier archivo de imagen para su procesamiento.
+- **Conversión a Escala de Grises**: Convierte la imagen cargada a escala de grises.
+- **Corrección Gamma**: Ajusta el nivel gamma de la imagen.
+- **Filtro Mínimo**: Aplica un filtro mínimo a la imagen.
+- **Binarización**: Aplica un umbral de binarización a la imagen.
+- **Diseño Responsivo**: Se ajusta a diferentes tamaños de pantalla para una visualización óptima.
 
-- **Image Upload**: Upload any image file for processing.
-- **Grayscale Conversion**: Convert the uploaded image to grayscale.
-- **Gamma Correction**: Adjust the gamma level of the image.
-- **Minimum Filter**: Apply a minimum filter to the image.
-- **Binarization**: Apply a binarization threshold to the image.
-- **Responsive Design**: Adjusts to different screen sizes for optimal viewing.
+## Cómo Usar
 
-## How to Use
+1. **Carga una Imagen**: Haz clic en el botón "Seleccionar una imagen" para cargar un archivo de imagen.
+2. **Aplica Procesamiento**: Usa la caja de herramientas para aplicar diferentes técnicas de procesamiento de imágenes:
+    - **Restaurar la Imagen**: Revierte la imagen a su estado original.
+    - **Aplicar Escala de Grises**: Convierte la imagen a escala de grises.
+    - **Aplicar Filtro Mínimo**: Aplica un filtro mínimo a la imagen.
+    - **Corrección Gamma**: Ajusta el nivel gamma usando el control deslizante proporcionado.
+    - **Binarización**: Ajusta el umbral de binarización usando el control deslizante proporcionado.
+3. **Ajustes Responsivos**: La aplicación ajustará automáticamente el tamaño del lienzo para que se adapte a la pantalla.
 
-1. **Upload an Image**: Click on the "Select an image" button to upload an image file.
-2. **Apply Processing**: Use the toolbox to apply different image processing techniques:
-    - **Restore the Image**: Reverts the image to its original state.
-    - **Apply Grayscale**: Converts the image to grayscale.
-    - **Apply Minimum Filter**: Applies a minimum filter to the image.
-    - **Gamma Correction**: Adjust the gamma level using the provided slider.
-    - **Binarization**: Adjust the binarization threshold using the provided slider.
-3. **Responsive Adjustments**: The application will automatically adjust the canvas size to fit the screen.
+## Dependencias
 
-## Dependencies
+- **OpenCV.js**: Se utiliza para operaciones de procesamiento de imágenes.
+- **Yotta.js**: Se utiliza para crear elementos HTML y gestionar la interfaz de usuario.
 
-- **OpenCV.js**: Used for image processing operations.
-- **Yotta.js**: Used for creating HTML elements and managing the UI.
+## Idiomas Soportados
 
-## Languages Supported
+- **Español** (predeterminado)
+- **Inglés** (requiere modificar la variable `language` en language.js)
 
-- **Spanish** (default)
-- **English** (requires modifying index.html `language` variable)
+## Desarrollo
 
-## Development
+### Requisitos Previos
 
-### Prerequisites
+Asegúrate de tener un navegador web moderno que admita JavaScript y pueda cargar bibliotecas externas.
 
-Ensure you have a modern web browser that supports JavaScript and can load external libraries.
+### Instalación
 
-### Installation
-
-Clone the repository and open `index.html` in your web browser.
+Clona el repositorio y abre `index.html` en tu navegador web.
 
 ```bash
 git clone https://github.com/artik02/Image-Processing-Playground.git
@@ -53,16 +52,16 @@ cd Image-Processing-Playground
 open index.html
 ```
 
-### Folder Structure
+### Estructura de Carpetas
 
-- `index.html`: The main HTML file containing the application structure.
-- `style.css`: The stylesheet for styling the application.
-- `language.js`: Contains language support for the application.
-- `image-processing.js`: Contains functions for image processing using OpenCV.js.
+- `index.html`: El archivo HTML principal que contiene la estructura de la aplicación.
+- `style.css`: La hoja de estilo para el estilo de la aplicación.
+- `language.js`: Contiene soporte de idiomas para la aplicación.
+- `image-processing.js`: Contiene funciones para el procesamiento de imágenes usando OpenCV.js.
 
-## Acknowledgments
+## Reconocimientos
 
-- OpenCV for providing a powerful library for computer vision tasks.
-- Yotta.js for simplifying HTML element creation and manipulation.
+- OpenCV por proporcionar una biblioteca potente para tareas de visión por computadora.
+- Yotta.js por simplificar la creación y manipulación de elementos HTML.
 
-Enjoy exploring and experimenting with different image processing techniques!
+¡Disfruta explorando y experimentando con diferentes técnicas de procesamiento de imágenes!
